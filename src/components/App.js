@@ -5,7 +5,7 @@ import { BsHeart, BsTrash } from 'react-icons/bs';
 
 function App() {
 	/* base url */
-	const url = 'http://localhost:3000/songs';
+	const url = 'https://tunr-back-ht.herokuapp.com/songs';
 
 	/* get all songs */
 	const [allSongs, setAllSongs] = useState({});
