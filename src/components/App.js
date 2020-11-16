@@ -30,7 +30,10 @@ function App() {
 							<h3>{song.artist}</h3>
 						</div>
 						<p>{song.time}</p>
-						<BsHeart onClick={() => handleHeartClick(song)} id={song.id} />
+						<BsHeart
+							onClick={() => handleHeartClick(song)}
+							className={faves.indexOf(song) === -1 ? 'black' : 'red'}
+						/>
 						<BsTrash onClick={() => removeSong(song)} />
 					</div>
 				))}
@@ -46,6 +49,7 @@ function App() {
 
 	const handleHeartClick = (song) => {
 		if (faves.indexOf(song) === -1) {
+			console.log(faves);
 			const addFave = faves.push(song);
 			setFaves([...faves, addFave]);
 		} else {
@@ -61,7 +65,7 @@ function App() {
 		<>
 			{faves &&
 				faves.map((song) => (
-					<div className='individual-song' key={song.id}>
+					<div className='individual-song-faves' key={song.id}>
 						<div className='data'>
 							<h2 className='individual-song-title'>{song.title}</h2>
 							<h3>{song.artist}</h3>
