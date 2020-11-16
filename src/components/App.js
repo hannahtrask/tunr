@@ -49,8 +49,8 @@ function App() {
 			const addFave = faves.push(song);
 			setFaves([...faves, addFave]);
 		} else {
-			console.log(faves.indexOf(song))
-			const index = faves.indexOf(song)
+			console.log(faves.indexOf(song));
+			const index = faves.indexOf(song);
 			faves.splice(index, 1);
 			setFaves([...faves]);
 		}
@@ -99,14 +99,12 @@ function App() {
 	};
 
 	const handleSubmit = (e) => {
-		e.preventDefault();
+		// e.preventDefault();
 		handleCreate(formData);
 	};
 
 	/* remove a song */
 	const removeSong = (song) => {
-		console.log('remove song clicked');
-		console.log(song);
 		axios.delete(url + '/' + song.id).then(() => getSongs());
 	};
 
@@ -130,28 +128,28 @@ function App() {
 			</div>
 			<br />
 			<div className='new-song'>
-				<h4>ADD A NEW SONG</h4>
+				<h2 className='list'>ADD A NEW SONG</h2>
 				<form onSubmit={handleSubmit}>
+					<h4>title</h4>
 					<input
 						type='text'
 						name='title'
-						placeholder='song title'
 						value={formData.title}
 						onChange={handleChange}
 					/>
 					<br />
+					<h4>artist</h4>
 					<input
 						type='text'
 						name='artist'
-						placeholder='artist'
 						value={formData.artist}
 						onChange={handleChange}
 					/>
 					<br />
+					<h4>time</h4>
 					<input
 						type='text'
 						name='time'
-						placeholder='time'
 						value={formData.time}
 						onChange={handleChange}
 					/>
