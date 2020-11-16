@@ -49,7 +49,6 @@ function App() {
 			const addFave = faves.push(song);
 			setFaves([...faves, addFave]);
 		} else {
-			console.log(faves.indexOf(song));
 			const index = faves.indexOf(song);
 			faves.splice(index, 1);
 			setFaves([...faves]);
