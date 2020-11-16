@@ -1,32 +1,37 @@
 import '../styles/App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BsHeart } from 'react-icons/bs';
+import { BsHeart, BsTrash } from 'react-icons/bs';
 
 function App() {
-	const [allSongs, setAllSongs] = useState({});
+	/* base url */
 	const url = 'http://localhost:3000/songs';
 
-	useEffect(() => {
+	/* get all songs */
+	const [allSongs, setAllSongs] = useState({});
+
+	const getSongs = () => {
 		axios
 			.get(url)
 			.then((res) => {
 				setAllSongs(res.data);
 			})
 			.catch((err) => console.log(err));
-	}, []);
-
-	console.log('this is allSongs', allSongs);
+	};
+	useEffect(() => getSongs(), []);
 
 	const songsDisplay = () => (
 		<>
 			{allSongs &&
 				allSongs.map((song) => (
-					<div className='individual-song'>
-						<h2>{song.title}</h2>
-						<h3>{song.artist}</h3>
+					<div className='individual-song' key={song.id}>
+						<div className='data'>
+							<h2 className='individual-song-title'>{song.title}</h2>
+							<h3>{song.artist}</h3>
+						</div>
 						<p>{song.time}</p>
-						<BsHeart />
+						<BsHeart onClick={() => handleHeartClick(song)} id={song.id} />
+						<BsTrash onClick={() => removeSong(song)} />
 					</div>
 				))}
 		</>
@@ -34,23 +39,123 @@ function App() {
 
 	const loadingSongs = <h1>loading songs...</h1>;
 
+	/* add to favorites */
+	const [faves, setFaves] = useState([
+		{ title: 'This is Nuts', artist: 'Him', time: '5:23' },
+	]);
+
+	const handleHeartClick = (song) => {
+		if (faves.indexOf(song) === -1) {
+			const addFave = faves.push(song);
+			setFaves([...faves, addFave]);
+		} else {
+			console.log(faves)
+			faves.pop(song);
+			setFaves([...faves]);
+		}
+	};
+
+	const loadingFaves = <h1>loading your favorites...</h1>;
+
+	const favesDisplay = () => (
+		<>
+			{faves &&
+				faves.map((song) => (
+					<div className='individual-song' key={song.id}>
+						<div className='data'>
+							<h2 className='individual-song-title'>{song.title}</h2>
+							<h3>{song.artist}</h3>
+						</div>
+						<p>{song.time}</p>
+						<BsHeart
+							onClick={() => handleHeartClick(song)}
+							id={song.id}
+							className='red'
+						/>
+					</div>
+				))}
+		</>
+	);
+
+	/* create a new song */
+	const emptySong = { title: '', artist: '', time: '' };
+	const [formData, setFormData] = useState(emptySong);
+
+	const handleChange = (event) => {
+		setFormData({ ...formData, [event.target.name]: event.target.value });
+	};
+
+	const handleCreate = (newSong) => {
+		fetch(url, {
+			method: 'post',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(newSong),
+		}).then(() => {
+			getSongs();
+		});
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		handleCreate(formData);
+	};
+
+	/* remove a song */
+	const removeSong = (song) => {
+		console.log('remove song clicked');
+		console.log(song);
+		axios.delete(url + '/' + song.id).then(() => getSongs());
+	};
+
+	/* page render */
 	return (
 		<div className='body'>
-			<h1>TUNR.</h1>
-			<h2>for all your playlist needs</h2>
+			<div className='header'>
+				<h1>TUNR.</h1>
+				<h3 className='title-head'>FOR ALL YOUR PLAYLIST NEEDS</h3>
+			</div>
 			<div>
-				<h1>PLAYLIST</h1>
+				<h2 className='list'>PLAYLIST</h2>
 				<div className='playlist'>
 					{allSongs.length > 0 ? songsDisplay() : loadingSongs}
 				</div>
 			</div>
+			<br />
 			<div className='favorite-songs'>
-				<h3>this will be a favorite songs list</h3>
+				<h2 className='list'>YOUR FAVES</h2>
+				{faves.length > 0 ? favesDisplay() : loadingFaves}
 			</div>
+			<br />
 			<div className='new-song'>
-				<h4>add a new song</h4>
-				<form>
-					<p>this will be a form, title, artist, time</p>
+				<h4>ADD A NEW SONG</h4>
+				<form onSubmit={handleSubmit}>
+					<input
+						type='text'
+						name='title'
+						placeholder='song title'
+						value={formData.title}
+						onChange={handleChange}
+					/>
+					<br />
+					<input
+						type='text'
+						name='artist'
+						placeholder='artist'
+						value={formData.artist}
+						onChange={handleChange}
+					/>
+					<br />
+					<input
+						type='text'
+						name='time'
+						placeholder='time'
+						value={formData.time}
+						onChange={handleChange}
+					/>
+					<br />
+					<input type='submit' value='ADD NEW SONG' className='submit' />
 				</form>
 			</div>
 		</div>
