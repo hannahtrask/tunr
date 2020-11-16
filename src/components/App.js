@@ -99,7 +99,6 @@ function App() {
 	};
 
 	const handleSubmit = (e) => {
-		// e.preventDefault();
 		handleCreate(formData);
 	};
 
