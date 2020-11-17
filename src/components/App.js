@@ -98,6 +98,7 @@ function App() {
 	const [faves, setFaves] = useState([
 		{ title: 'This is Nuts', artist: 'Him', time: '5:23' },
 	]);
+	// const [allFaves, setAllFaves] = useState({})
 
 	const handleHeartClick = (song) => {
 		if (faves.indexOf(song) === -1) {
@@ -110,6 +111,15 @@ function App() {
 			setFaves([...faves]);
 		}
 	};
+		// const getAllFaves = () => {
+		// 	axios
+		// 		.get(url)
+		// 		.then((res) => {
+		// 			setFaves(res.data);
+		// 		})
+		// 		.catch((err) => console.log(err));
+		// };
+		// useEffect(() => getAllFaves(), []);
 
 	const loadingFaves = (
 		<>
@@ -175,7 +185,7 @@ function App() {
 		<div className='body'>
 			<div className='header'>
 				<h1>TUNR.</h1>
-				<h3 className='title-head'>FOR ALL YOUR PLAYLIST NEEDS</h3>
+				<h3 className='title-head'>TIME TO TURNIP THE BEET</h3>
 			</div>
 			<div>
 				<h2 className='list'>PLAYLIST</h2>
