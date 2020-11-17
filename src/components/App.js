@@ -98,11 +98,9 @@ function App() {
 	const [faves, setFaves] = useState([
 		{ title: 'This is Nuts', artist: 'Him', time: '5:23' },
 	]);
-	// const [allFaves, setAllFaves] = useState({})
 
 	const handleHeartClick = (song) => {
 		if (faves.indexOf(song) === -1) {
-			console.log(faves);
 			const addFave = faves.push(song);
 			setFaves([...faves, addFave]);
 		} else {
@@ -111,15 +109,6 @@ function App() {
 			setFaves([...faves]);
 		}
 	};
-		// const getAllFaves = () => {
-		// 	axios
-		// 		.get(url)
-		// 		.then((res) => {
-		// 			setFaves(res.data);
-		// 		})
-		// 		.catch((err) => console.log(err));
-		// };
-		// useEffect(() => getAllFaves(), []);
 
 	const loadingFaves = (
 		<>
