@@ -1,19 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Roboto+Condensed:wght@700&display=swap');
-/* font-family: 'Fira Mono', monospace;
-font-family: 'Roboto Condensed', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Montserrat&display=swap');
+/* font-family: 'Architects Daughter', cursive;
+font-family: 'Montserrat', sans-serif; */
 
 html {
-	font-family: 'Roboto Condensed', sans-serif;
-	color: #19323c;
+	font-family: 'Montserrat', sans-serif;
+    background-color: #19323c;
+    background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 body {
+    padding-top: 1000px;
+    height: 100%;
 	margin: 40px;
-	width: auto;
+	width: 70vw;
 	max-width: 1000px;
 	padding: 10px;
-	border: 1px solid black;
-    box-shadow: 5px 5px rgba(210, 210, 210, 0.8);
+    border: 3px solid black;
+    background-color: rgba(250, 250, 250, 0.8);
+	box-shadow: 5px 5px rgba(210, 210, 210, 0.6);
     border-radius: 15px;
 }
 
@@ -31,7 +39,7 @@ h3 {
 }
 
 h4 {
-    letter-spacing: 1px;
+	letter-spacing: 1px;
 }
 
 .individual-song {
@@ -42,7 +50,7 @@ h4 {
 }
 
 .individual-song-title {
-	color: #5c7d8b;
+	color: #1B4F3C;
 	font-size: 1rem;
 }
 
@@ -50,8 +58,8 @@ input {
 	margin: 10px;
 	padding: 10px;
 	width: 50vw;
-    border-radius: 5px;
-    border: 1px solid black;
+	border-radius: 5px;
+	border: 1px solid black;
 }
 
 .red {
@@ -59,7 +67,8 @@ input {
 }
 
 .submit {
-	background-color: #a93e55;
+    background-color: #F7910F;
+    width: 60vw;
 	border: none;
 	color: white;
 }
@@ -73,7 +82,7 @@ input {
 	margin-left: 30px;
 	padding: 10px;
 	width: 600px;
-	border-bottom: 5px solid #a93e55;
+	border-bottom: 5px solid #F7910F;
 }
 
 .data {
@@ -91,7 +100,7 @@ p {
 
 .list {
 	padding: 10px;
-	width: 75vw;
+	width: 65vw;
 	border-top: 0.5px solid black;
 	border-bottom: 0.5px solid black;
 }
@@ -99,5 +108,17 @@ p {
 h2,
 h3,
 p {
-	font-family: 'Fira Mono', monospace;
+    font-family: 'Architects Daughter', cursive;
+}
+
+.new-song {
+    margin: 0 auto;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    box-shadow: 5px 5px rgba(210, 210, 210, 0.6);
+}
+
+form {
+    margin: 0 auto;
 }

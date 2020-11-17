@@ -2,6 +2,19 @@ import '../styles/App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BsHeart, BsTrash } from 'react-icons/bs';
+import { motion } from 'framer-motion';
+
+const buttonVariants = {
+	hover: {
+		scale: 1.1,
+		textShadow: '0px 0px 8px rgb(255, 255, 255)',
+		boxShadow: '0px 0px 8px rgb(255, 255, 255)',
+		transition: {
+			duration: 0.5,
+			yoyo: Infinity,
+		},
+	},
+};
 
 function App() {
 	/* base url */
@@ -156,7 +169,13 @@ function App() {
 						onChange={handleChange}
 					/>
 					<br />
-					<input type='submit' value='ADD NEW SONG' className='submit' />
+					<motion.input
+						variants={buttonVariants}
+						whileHover='hover'
+						type='submit'
+						value='ADD NEW SONG'
+						className='submit'
+					/>
 				</form>
 			</div>
 		</div>
