@@ -2,7 +2,7 @@ import '../styles/App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BsHeart, BsTrash } from 'react-icons/bs';
-import { motion } from 'framer-motion';
+import { motion, useCycle } from 'framer-motion';
 
 const buttonVariants = {
 	hover: {
@@ -12,6 +12,35 @@ const buttonVariants = {
 		transition: {
 			duration: 0.5,
 			yoyo: Infinity,
+		},
+	},
+};
+
+const loaderVariants = {
+	animationOne: {
+		x: [-20, 20],
+		y: [0, -30],
+		transition: {
+			x: {
+				yoyo: Infinity,
+				duration: 0.5,
+			},
+			y: {
+				yoyo: Infinity,
+				duration: 0.25,
+				ease: 'easeOut',
+			},
+		},
+	},
+	animationTwo: {
+		y: [0, -40],
+		x: 0,
+		transition: {
+			y: {
+				yoyo: Infinity,
+				duration: 0.25,
+				ease: 'easeOut',
+			},
 		},
 	},
 };
@@ -53,7 +82,17 @@ function App() {
 		</>
 	);
 
-	const loadingSongs = <h1>loading songs...</h1>;
+	/* loader */
+	const [animation, cycleAnimation] = useCycle('animationOne', 'animationTwo');
+	const loadingSongs = (
+		<>
+			<motion.div
+				className='loader'
+				variants={loaderVariants}
+				animate={animation}></motion.div>
+			<div onClick={() => cycleAnimation()}></div>
+		</>
+	);
 
 	/* add to favorites */
 	const [faves, setFaves] = useState([
@@ -72,7 +111,15 @@ function App() {
 		}
 	};
 
-	const loadingFaves = <h1>loading your favorites...</h1>;
+	const loadingFaves = (
+		<>
+			<motion.div
+				className='loader'
+				variants={loaderVariants}
+				animate={animation}></motion.div>
+			<div onClick={() => cycleAnimation()}></div>
+		</>
+	);
 
 	const favesDisplay = () => (
 		<>
